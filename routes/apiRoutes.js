@@ -1,64 +1,67 @@
 const express = require("express");
-const apiRouter = express.Router();
-const apiController = require("../controllers/apiController");
+const userRouter = express.Router();
+// const apiController = require("../controllers/apiController");
 const { expressjwt: checkJwt } = require("express-jwt");
 
-apiRouter.post("/user", apiController.storeUser);
+userRouter.get("/", (req, res) => {
+  res.send("probando");
+});
+// apiRouter.post("/user", apiController.storeUser);
 
-apiRouter.post("/token", apiController.token);
+// apiRouter.post("/token", apiController.token);
 
-apiRouter.post(
-  "/tweet",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.createTweet,
-);
+// apiRouter.post(
+//   "/tweet",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.createTweet,
+// );
 
-apiRouter.delete(
-  "/tweet/:id",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.destroyTweet,
-);
+// apiRouter.delete(
+//   "/tweet/:id",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.destroyTweet,
+// );
 
-apiRouter.get(
-  "/tweets",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.showTweets,
-);
+// apiRouter.get(
+//   "/tweets",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.showTweets,
+// );
 
-apiRouter.get(
-  "/tweets/:id",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.showMyTweets,
-);
+// apiRouter.get(
+//   "/tweets/:id",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.showMyTweets,
+// );
 
-apiRouter.get(
-  "/followers",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.followers,
-);
+// apiRouter.get(
+//   "/followers",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.followers,
+// );
 
-apiRouter.get(
-  "/follow/:id",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.follow,
-);
+// apiRouter.get(
+//   "/follow/:id",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.follow,
+// );
 
-apiRouter.get(
-  "/unfollow/:id",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.unfollow,
-);
+// apiRouter.get(
+//   "/unfollow/:id",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.unfollow,
+// );
 
-apiRouter.get(
-  "/following",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.following,
-);
+// apiRouter.get(
+//   "/following",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.following,
+// );
 
-apiRouter.patch(
-  "/likes/:id",
-  checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
-  apiController.updateLikes,
-);
+// apiRouter.patch(
+//   "/likes/:id",
+//   checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+//   apiController.updateLikes,
+// );
 
-module.exports = apiRouter;
+module.exports = userRouter;
