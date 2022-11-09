@@ -7,31 +7,34 @@ faker.locale = "es";
 
 module.exports = async () => {
   await mongoose.connection.dropDatabase();
+  console.log("entre user seeder");
   const users = [];
 
-  for (let i = 0; i < 20; i++) {
-    const hashedPassword = await bcrypt.hash("1234", 10);
+  const admin = new User({
+    firstname: "admin",
+    lastname: "admin",
+    email: "admin@admin.com",
+    address: "street 1234",
+    password: "1",
+    phoneNumber: "123456789",
+    admin: true,
+  });
+  console.log("estoy en el medio");
+
+  for (let i = 0; i < 10; i++) {
     const user = new User({
       firstname: faker.name.firstName(),
       lastname: faker.name.lastName(),
       email: faker.internet.email(),
-      avatar: faker.image.avatar(),
-      username: faker.internet.userName(),
-      password: hashedPassword,
-      bio: faker.lorem.paragraphs(),
+      address: faker.address.streetAddress(),
+      password: "1",
+      phoneNumber: "123456789",
+      admin: false,
     });
     users.push(user);
   }
-
-  for (let i = 0; i < users.length; i++) {
-    let random = faker.datatype.number({ min: 0, max: users.length - 1 });
-    while (random === i) {
-      random = faker.datatype.number({ min: 0, max: users.length - 1 });
-    }
-    users[i].following.push(users[random]._id);
-    users[random].followers.push(users[i]._id);
-  }
-
+  console.log("sali del for");
+  admin.save();
   await User.insertMany(users);
   console.log("[Database] Se corrió el seeder de Users.");
 };
