@@ -13,7 +13,7 @@ app.use(express.static("public"));
 
 routes(app);
 
-dbInitialSetup();
+// dbInitialSetup();
 
 app.listen(APP_PORT, () => {
   console.log(`\n[Express] Servidor corriendo en el puerto ${APP_PORT}.`);
