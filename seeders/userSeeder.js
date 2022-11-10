@@ -7,7 +7,6 @@ faker.locale = "es";
 
 module.exports = async () => {
   await mongoose.connection.dropDatabase();
-  console.log("entre user seeder");
   const users = [];
 
   const admin = new User({
@@ -19,7 +18,6 @@ module.exports = async () => {
     phoneNumber: "123456789",
     admin: true,
   });
-  console.log("estoy en el medio");
 
   for (let i = 0; i < 10; i++) {
     const user = new User({
@@ -33,7 +31,7 @@ module.exports = async () => {
     });
     users.push(user);
   }
-  console.log("sali del for");
+
   admin.save();
   await User.insertMany(users);
   console.log("[Database] Se corrió el seeder de Users.");
