@@ -25,5 +25,4 @@ module.exports = async () => {
 
   await Product.insertMany(products);
   console.log("[Database] Se corrió el seeder de Products.");
-  p;
 };
