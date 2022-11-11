@@ -1,12 +1,15 @@
 const express = require("express");
-const userRouter = express.Router();
+const apiRouter = express.Router();
 const apiController = require("../controllers/apiController");
 const { expressjwt: checkJwt } = require("express-jwt");
 
-userRouter.get("/", (req, res) => {
+apiRouter.get("/", (req, res) => {
   res.send("probando");
 });
 
-userRouter.get("/featured", apiController.ShowFeatured);
+apiRouter.get("/featured", apiController.ShowFeatured);
 
-module.exports = userRouter;
+apiRouter.post("/signup", apiController.storeUser);
+apiRouter.post("/tokens", apiController.token);
+
+module.exports = apiRouter;
