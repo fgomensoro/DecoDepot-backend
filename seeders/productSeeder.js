@@ -11,7 +11,7 @@ module.exports = async () => {
       categories[faker.datatype.number({ min: 0, max: categories.length - 1 })];
     const feat = Math.floor(Math.random() * 10 + 1) > 5 ? true : false;
     const product = new Product({
-      name: "mueble" + i,
+      name: "Mueble" + i,
       description:
         "Our coffee tables, side tables, and benches — across a variety of stylistic collections — are designed to complement our award-winning seating. Whether you’re looking for a functional coffee table with storage or a timeless mid-century Modern design, our edited selection represents the best of furniture design.",
       images: ["imgPrueba1.jpg", "imgPrueba2.jpg", "imgPrueba3.jpg"],

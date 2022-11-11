@@ -37,29 +37,28 @@ async function storeUser(req, res) {
 
 async function token(req, res) {
   const user = await User.findOne({ email: req.body.email });
+  const storedHash = user.password;
+  const checkPassword = await bcrypt.compare(req.body.password, storedHash);
 
-  if (!user) return res.status(404).json("Credenciales Incorrectas");
-
-  if (user.password !== req.body.password) {
-    return res.status(404).json("Credenciales Incorrectas");
+  if (!user) {
+    return res.json("credenciales inválidas user");
   }
 
-  const loggedUser = {
-    id: user._id,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    email: user.email,
-    admin: user.admin,
-  };
+  if (!checkPassword) {
+    return res.json("credenciales inválidas password");
+  }
 
-  let payload = {
+  const payload = {
     email: req.body.email,
     id: user.id,
     username: user.username,
   };
 
-  const token = jwt.sign(payload, "textoSecreto");
-  return res.status(200).json({ token, loggedUser });
+  const token = jwt.sign(payload, process.env.JWT_SECRET);
+
+  res.json({
+    token,
+  });
 }
 
 module.exports = {
