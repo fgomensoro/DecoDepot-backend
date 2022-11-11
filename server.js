@@ -13,7 +13,11 @@ app.use(express.static("public"));
 
 routes(app);
 
+<<<<<<< HEAD
 // dbInitialSetup();
+=======
+dbInitialSetup();
+>>>>>>> 9c929ecac35bb25a1624f5bab8b25a981f4c1ff5
 
 app.listen(APP_PORT, () => {
   console.log(`\n[Express] Servidor corriendo en el puerto ${APP_PORT}.`);

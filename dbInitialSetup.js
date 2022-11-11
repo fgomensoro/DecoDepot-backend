@@ -8,7 +8,7 @@ mongoose.connection
   .on("error", (error) => console.log(error));
 
 async function dbInitialSetup() {
-  console.log("entre");
+  console.log("entre al initial setup");
   await require("./seeders/userSeeder")();
   await require("./seeders/categorySeeder")();
   await require("./seeders/productSeeder")();
