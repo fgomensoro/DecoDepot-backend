@@ -10,7 +10,6 @@ async function ShowFeatured(req, res) {
 }
 
 async function storeUser(req, res) {
-  console.log("hola");
   const newUser = await new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -25,7 +24,6 @@ async function storeUser(req, res) {
 }
 
 async function token(req, res) {
-  console.log("hola");
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) return res.status(404).json("Credenciales Incorrectas");
