@@ -12,7 +12,7 @@ async function dbInitialSetup() {
   await require("./seeders/userSeeder")();
   await require("./seeders/categorySeeder")();
   await require("./seeders/productSeeder")();
-  await require("./seeders/comboSeeder")();
+  await require("./seeders/packSeeder")();
   await require("./seeders/reviewSeeder")();
   await require("./seeders/orderSeeder")();
   console.log("[DB] Los datos de prueba fueron insertados!");
