@@ -13,10 +13,7 @@ module.exports = async () => {
     const combo = new Combo({
       name: `combo${i + 1}`,
       bigImage: `bigImage_${i + 1}.jpg`,
-      image1: randomProduct,
-      image2: randomProduct2,
-      image3: randomProduct3,
-      image4: randomProduct4,
+      products: [randomProduct, randomProduct2, randomProduct3, randomProduct4],
     });
 
     await combo.save();
