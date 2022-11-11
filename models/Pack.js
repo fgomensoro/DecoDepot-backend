@@ -1,6 +1,6 @@
 const { mongoose, Schema } = require("../dbInitialSetup");
 
-const comboSchema = new Schema({
+const packSchema = new Schema({
   name: String,
   bigImage: String,
   products: [
@@ -11,6 +11,6 @@ const comboSchema = new Schema({
   ],
 });
 
-const Combo = mongoose.model("Combo", comboSchema);
+const Pack = mongoose.model("Pack", packSchema);
 
-module.exports = Combo;
+module.exports = Pack;

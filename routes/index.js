@@ -1,9 +1,9 @@
 const apiRouter = require("./apiRoutes");
 const reviewsRouter = require("./reviewsRoutes");
-const combosRouter = require("./combosRoutes");
+const packsRouter = require("./packsRoutes");
 
 module.exports = (app) => {
   app.use("/api", apiRouter);
   app.use("/reviews", reviewsRouter);
-  app.use("/combos", combosRouter);
+  app.use("/packs", packsRouter);
 };

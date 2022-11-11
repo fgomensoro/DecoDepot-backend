@@ -1,5 +1,5 @@
 const Product = require("../models/Product");
-const Combo = require("../models/Combo");
+const Pack = require("../models/Pack");
 const { faker } = require("@faker-js/faker");
 
 module.exports = async () => {
@@ -10,14 +10,14 @@ module.exports = async () => {
     const randomProduct3 = products[faker.datatype.number({ min: 0, max: products.length - 1 })];
     const randomProduct4 = products[faker.datatype.number({ min: 0, max: products.length - 1 })];
 
-    const combo = new Combo({
-      name: `combo${i + 1}`,
+    const pack = new Pack({
+      name: `pack${i + 1}`,
       bigImage: `bigImage_${i + 1}.jpg`,
       products: [randomProduct, randomProduct2, randomProduct3, randomProduct4],
     });
 
-    await combo.save();
+    await pack.save();
   }
 
-  console.log("[Database] Se corrió el seeder de Combo.");
+  console.log("[Database] Se corrió el seeder de Pack.");
 };
