@@ -10,5 +10,6 @@ apiRouter.get("/", (req, res) => {
 apiRouter.get("/featured", apiController.ShowFeatured);
 
 apiRouter.post("/signup", apiController.storeUser);
+apiRouter.post("/tokens", apiController.token);
 
 module.exports = apiRouter;

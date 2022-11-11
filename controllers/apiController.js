@@ -24,7 +24,36 @@ async function storeUser(req, res) {
   res.json("algo paso");
 }
 
+async function token(req, res) {
+  console.log("hola");
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) return res.status(404).json("Credenciales Incorrectas");
+
+  if (user.password !== req.body.password) {
+    return res.status(404).json("Credenciales Incorrectas");
+  }
+
+  const loggedUser = {
+    id: user._id,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    email: user.email,
+    admin: user.admin,
+  };
+
+  let payload = {
+    email: req.body.email,
+    id: user.id,
+    username: user.username,
+  };
+
+  const token = jwt.sign(payload, "textoSecreto");
+  return res.status(200).json({ token, loggedUser });
+}
+
 module.exports = {
   ShowFeatured,
   storeUser,
+  token,
 };
