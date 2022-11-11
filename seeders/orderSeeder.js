@@ -7,7 +7,7 @@ module.exports = async () => {
   const orders = ["1", "2", "3", "4"];
   for (let i = 0; i < orders.length; i++) {
     const order = new Order({
-      name: orders[i],
+      name: "order" + orders[i],
     });
 
     await order.save();
