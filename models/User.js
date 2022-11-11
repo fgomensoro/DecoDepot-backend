@@ -20,7 +20,7 @@ const userSchema = new Schema(
   // { timestamps: true },
 );
 
-userSchema.pre("save", async function save(next) {
+/* userSchema.pre("save", async function save(next) {
   console.log("entre al pre");
   if (!this.isModified("password")) {
     console.log("adentro del if");
@@ -36,7 +36,7 @@ userSchema.pre("save", async function save(next) {
   } catch (err) {
     return next(err);
   }
-});
+}); */
 
 userSchema.methods.validatePassword = async function validatePassword(data) {
   return bcrypt.compare(data, this.password);

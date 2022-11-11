@@ -10,17 +10,29 @@ async function ShowFeatured(req, res) {
 }
 
 async function storeUser(req, res) {
-  const newUser = await new User({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    password: req.body.password,
-    adress: req.body.adress,
-    phoneNumber: req.body.phoneNumber,
-  });
-
-  await newUser.save();
-  res.json("algo paso");
+  console.log(req.body);
+  const userAutentication = await User.findOne({ email: req.body.email });
+  const passwordAutentication = req.body.password === req.body.confirmPassword;
+  if (!userAutentication && passwordAutentication) {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const userCreated = await User.create({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      adress: req.body.adress,
+      password: hashedPassword,
+      phoneNumber: req.body.phoneNumber,
+    });
+    if (userCreated) {
+      return res.json(userCreated);
+    }
+  } else {
+    if (!passwordAutentication) {
+      res.json("⚠️ Password confirmation doesn't match Password ");
+    } else {
+      res.json("⚠️ User already exists");
+    }
+  }
 }
 
 async function token(req, res) {
