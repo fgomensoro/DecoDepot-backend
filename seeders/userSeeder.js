@@ -16,7 +16,7 @@ module.exports = async () => {
     address: "street 1234",
     password: "1",
     phoneNumber: "123456789",
-    admin: true,
+    isAdmin: true,
   });
 
   for (let i = 0; i < 10; i++) {
@@ -27,12 +27,12 @@ module.exports = async () => {
       address: faker.address.streetAddress(),
       password: "1",
       phoneNumber: "123456789",
-      admin: false,
+      isAdmin: false,
     });
     users.push(user);
   }
 
-  admin.save();
+  await admin.save();
   await User.insertMany(users);
   console.log("[Database] Se corrió el seeder de Users.");
 };

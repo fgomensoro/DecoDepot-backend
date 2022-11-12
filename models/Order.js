@@ -1,5 +1,4 @@
 const { mongoose, Schema } = require("../dbInitialSetup");
-const bcrypt = require("bcryptjs");
 
 const orderSchema = new Schema({
   name: String,

@@ -1,15 +1,13 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 async function index(req, res) {
   const users = await User.find();
   res.json({ users });
 }
 
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-
-async function storeUser(req, res) {
-  console.log(req.body);
+async function store(req, res) {
   const userAutentication = await User.findOne({ email: req.body.email });
   const passwordAutentication = req.body.password === req.body.confirmPassword;
   if (!userAutentication && passwordAutentication) {
@@ -18,50 +16,80 @@ async function storeUser(req, res) {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
-      adress: req.body.adress,
+      address: req.body.address,
       password: hashedPassword,
       phoneNumber: req.body.phoneNumber,
+      isAdmin: false,
     });
     if (userCreated) {
-      return res.json(userCreated);
+      await userCreated.save();
+      const payload = {
+        id: userCreated._id,
+        isAdmin: userCreated.isAdmin,
+      };
+      const token = jwt.sign({ payload }, "stringSecreto");
+      const user = {
+        token: token,
+        firstname: userCreated.firstname,
+        lastname: userCreated.lastname,
+        email: userCreated.email,
+        address: userCreated.address,
+        phoneNumber: userCreated.phoneNumber,
+        isAdmin: userCreated.isAdmin,
+        orders: [],
+      };
+      return res.json({
+        user,
+      });
     }
   } else {
     if (!passwordAutentication) {
-      res.json("⚠️ Password confirmation doesn't match Password ");
+      return res.json({ msg: "⚠️ Password confirmation doesn't match Password " });
     } else {
-      res.json("⚠️ User already exists");
+      return res.json({ msg: "⚠️ User already exists" });
     }
   }
 }
 
 async function token(req, res) {
-  const user = await User.findOne({ email: req.body.email });
-  const storedHash = user.password;
-  const checkPassword = await bcrypt.compare(req.body.password, storedHash);
+  try {
+    let user = await User.findOne({ email: req.body.email });
+    const checkPassword = bcrypt.compare(user.password, req.body.password);
+    if (!user) {
+      return res.json("credenciales inválidas user");
+    }
 
-  if (!user) {
-    return res.json("credenciales inválidas user");
+    if (!checkPassword) {
+      return res.json("credenciales inválidas password");
+    }
+
+    if (checkPassword) {
+      const payload = {
+        id: user._id,
+        isAdmin: user.isAdmin,
+      };
+      const token = jwt.sign({ payload }, process.env.JWT_SECRET);
+      user = {
+        token: token,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        address: user.address,
+        phoneNumber: user.phoneNumber,
+        isAdmin: user.isAdmin,
+        orders: [],
+      };
+      return res.json({
+        user,
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({ msg: "User not find" });
   }
-
-  if (!checkPassword) {
-    return res.json("credenciales inválidas password");
-  }
-
-  const payload = {
-    email: req.body.email,
-    id: user.id,
-    username: user.username,
-  };
-
-  const token = jwt.sign(payload, process.env.JWT_SECRET);
-
-  res.json({
-    token,
-  });
 }
 
 module.exports = {
   index,
-  storeUser,
+  store,
   token,
 };
