@@ -14,7 +14,18 @@ async function detail(req, res) {
   res.json({ product });
 }
 
+async function detailSimilar(req, res) {
+  const products = await Product.find({ category: req.params.id })
+    .populate({
+      path: "category",
+      Category,
+    })
+    .limit(3);
+  res.json({ products });
+}
+
 module.exports = {
   index,
   detail,
+  detailSimilar,
 };

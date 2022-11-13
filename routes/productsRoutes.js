@@ -7,4 +7,6 @@ productsRouter.get("/", productsController.index);
 
 productsRouter.get("/detail/:id", productsController.detail);
 
+productsRouter.get("/similar/:id", productsController.detailSimilar);
+
 module.exports = productsRouter;
