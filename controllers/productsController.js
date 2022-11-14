@@ -30,7 +30,27 @@ async function store(req, res) {
   });
 }
 
+async function detail(req, res) {
+  const product = await Product.findOne({ _id: req.params.id }).populate({
+    path: "category",
+    Category,
+  });
+  res.json({ product });
+}
+
+async function detailSimilar(req, res) {
+  const products = await Product.find({ category: req.params.id })
+    .populate({
+      path: "category",
+      Category,
+    })
+    .limit(3);
+  res.json({ products });
+}
+
 module.exports = {
   index,
   store,
+  detail,
+  detailSimilar,
 };
