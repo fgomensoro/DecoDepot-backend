@@ -4,11 +4,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const formidable = require("formidable");
 
-async function ShowFeatured(req, res) {
-  const featured = await Product.find({ featured: true });
-  res.json(featured);
-}
-
 async function storeUser(req, res) {
   console.log(req.body);
   const userAutentication = await User.findOne({ email: req.body.email });
@@ -62,7 +57,6 @@ async function token(req, res) {
 }
 
 module.exports = {
-  ShowFeatured,
   storeUser,
   token,
 };

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 
 async function index(req, res) {
   const users = await User.find();
-  res.json({ users });
+  res.json(users);
 }
 
 async function store(req, res) {
@@ -38,9 +38,7 @@ async function store(req, res) {
         isAdmin: userCreated.isAdmin,
         orders: [],
       };
-      return res.json({
-        user,
-      });
+      return res.json(user);
     }
   } else {
     if (!passwordAutentication) {
@@ -79,9 +77,7 @@ async function token(req, res) {
         isAdmin: user.isAdmin,
         orders: [],
       };
-      return res.json({
-        user,
-      });
+      return res.json(user);
     }
   } catch (error) {
     return res.status(400).json({ msg: "User not find" });

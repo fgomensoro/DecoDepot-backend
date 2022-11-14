@@ -5,8 +5,12 @@ const { expressjwt: checkJwt } = require("express-jwt");
 
 productsRouter.get("/", productsController.index);
 
-productsRouter.get("/detail/:id", productsController.detail);
+productsRouter.post("/", productsController.store);
 
-productsRouter.get("/similar/:id", productsController.detailSimilar);
+productsRouter.get("/:id", productsController.show);
+
+productsRouter.patch("/:id", productsController.update);
+
+productsRouter.delete("/:id", productsController.destroy);
 
 module.exports = productsRouter;
