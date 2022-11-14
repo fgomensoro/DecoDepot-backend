@@ -20,7 +20,7 @@ module.exports = async () => {
       featured: feat,
       category: randomCategory,
     });
-    products.push(product);
+    (product.slug = `${product.name}_${randomCategory.name}`), products.push(product);
   }
 
   await Product.insertMany(products);
