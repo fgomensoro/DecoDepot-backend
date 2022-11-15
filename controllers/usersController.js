@@ -52,13 +52,10 @@ async function store(req, res) {
 async function token(req, res) {
   try {
     let user = await User.findOne({ email: req.body.email });
-    const checkPassword = bcrypt.compare(user.password, req.body.password);
-    if (!user) {
-      return res.json("credenciales inválidas user");
-    }
+    const checkPassword = await bcrypt.compare(req.body.password, user.password);
 
     if (!checkPassword) {
-      return res.json("credenciales inválidas password");
+      return res.json({ msg: "Invalid credentials" });
     }
 
     if (checkPassword) {

@@ -2,6 +2,10 @@ const express = require("express");
 const ordersRouter = express.Router();
 const ordersController = require("../controllers/ordersController");
 const { expressjwt: checkJwt } = require("express-jwt");
+const ensureIsAdmin = require("../middlewares/isAdmin");
 
 ordersRouter.use(checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })),
-  (module.exports = ordersRouter);
+  ordersRouter.use(ensureIsAdmin);
+
+ordersRouter.get("/", ordersController.index);
+module.exports = ordersRouter;
