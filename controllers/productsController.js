@@ -4,13 +4,17 @@ const formidable = require("formidable");
 
 async function index(req, res) {
   let products;
-  if (req.query) {
+  if (req.query.limit) {
+    products = await Product.find({ category: req.query.category })
+      .populate({ path: "category", Category })
+      .limit(req.query.limit);
+  } else if (req.query) {
     products = await Product.find(req.query).populate({ path: "category", Category });
   } else {
     products = await Product.find().populate({ path: "category", Category });
   }
 
-  res.json(products);
+  return res.json(products);
 }
 
 async function store(req, res) {
@@ -37,7 +41,8 @@ async function store(req, res) {
 }
 
 async function show(req, res) {
-  console.log("update");
+  console.log("show");
+  console.log(req.params.id);
   const product = await Product.findById(req.params.id).populate({
     path: "category",
     Category,
@@ -46,7 +51,6 @@ async function show(req, res) {
 }
 
 async function update(req, res) {
-  console.log(req.auth.payload.isAdmin);
   const product = await Product.findById(req.params.id);
   if (product) {
     try {
