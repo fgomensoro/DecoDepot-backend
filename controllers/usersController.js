@@ -27,7 +27,7 @@ async function store(req, res) {
         id: userCreated._id,
         isAdmin: userCreated.isAdmin,
       };
-      const token = jwt.sign({ payload }, "stringSecreto");
+      const token = jwt.sign({ payload }, process.env.JWT_SECRET);
       const user = {
         token: token,
         firstname: userCreated.firstname,

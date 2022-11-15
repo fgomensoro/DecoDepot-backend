@@ -5,4 +5,5 @@ const { expressjwt: checkJwt } = require("express-jwt");
 
 reviewsRouter.get("/", reviewsController.index);
 
-module.exports = reviewsRouter;
+reviewsRouter.use(checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })),
+  (module.exports = reviewsRouter);

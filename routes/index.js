@@ -4,6 +4,7 @@ const usersRouter = require("./usersRoutes");
 const reviewsRouter = require("./reviewsRoutes");
 const categoriesRouter = require("./categoriesRoutes");
 const packsRouter = require("./packsRoutes");
+const adminRouter = require("./adminRoutes");
 
 module.exports = (app) => {
   app.use("/products", productsRouter);
@@ -12,4 +13,5 @@ module.exports = (app) => {
   app.use("/reviews", reviewsRouter);
   app.use("/categories", categoriesRouter);
   app.use("/packs", packsRouter);
+  app.use("/admin", adminRouter);
 };

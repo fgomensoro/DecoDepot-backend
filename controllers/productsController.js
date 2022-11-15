@@ -37,14 +37,16 @@ async function store(req, res) {
 }
 
 async function show(req, res) {
+  console.log("update");
   const product = await Product.findById(req.params.id).populate({
     path: "category",
     Category,
   });
-  res.json({ product }); //response.data.product
+  res.json(product); //response.data.product
 }
 
 async function update(req, res) {
+  console.log(req.auth.payload.isAdmin);
   const product = await Product.findById(req.params.id);
   if (product) {
     try {

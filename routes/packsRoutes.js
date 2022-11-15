@@ -5,4 +5,5 @@ const { expressjwt: checkJwt } = require("express-jwt");
 
 packsRouter.get("/", packsController.ShowPacks);
 
-module.exports = packsRouter;
+packsRouter.use(checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })),
+  (module.exports = packsRouter);
