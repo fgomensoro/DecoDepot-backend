@@ -6,6 +6,7 @@ const ensureIsAdmin = require("../middlewares/isAdmin");
 
 usersRouter.post("/signup", usersController.store);
 usersRouter.post("/tokens", usersController.token);
+usersRouter.patch("/:id", usersController.update);
 
 usersRouter.use(checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })),
   usersRouter.use(ensureIsAdmin);
