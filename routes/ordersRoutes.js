@@ -11,4 +11,6 @@ ordersRouter.get("/", ordersController.index);
 
 ordersRouter.post("/", ordersController.store);
 
+ordersRouter.patch("/:id", ordersController.update);
+
 module.exports = ordersRouter;
