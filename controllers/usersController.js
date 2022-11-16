@@ -63,7 +63,7 @@ async function token(req, res) {
         id: user._id,
         isAdmin: user.isAdmin,
       };
-      const token = jwt.sign({ payload }, process.env.JWT_SECRET);
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
       user = {
         token: token,
         firstname: user.firstname,
