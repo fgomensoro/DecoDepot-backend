@@ -41,7 +41,7 @@ async function store(req, res) {
       return res.json(user);
     }
   } else {
-    if (!passwordAutentication) {
+    if (!passwordAutentication && passwordAutentication) {
       return res.json({ msg: "⚠️ Password confirmation doesn't match Password " });
     } else {
       return res.json({ msg: "⚠️ User already exists" });
@@ -81,8 +81,34 @@ async function token(req, res) {
   }
 }
 
+async function update(req, res) {
+  const user = await User.findById(req.params.id);
+  const userAutentication = await User.findOne({ email: req.body.email });
+  const passwordAutentication = req.body.password === req.body.confirmPassword;
+  if (!userAutentication && passwordAutentication) {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    user.firstname = req.body.firstname;
+    user.lastname = req.body.lastname;
+    user.email = req.body.email;
+    user.address = req.body.adress;
+    user.phoneNumber = req.body.phoneNumber;
+    user.password = hashedPassword;
+    console.log(req.body);
+    user.save();
+  } else {
+    if (!passwordAutentication) {
+      return res.json({ msg: "⚠️ Password confirmation doesn't match Password " });
+    } else {
+      return res.json({ msg: "⚠️ User already exists" });
+    }
+  }
+
+  return res.json(user);
+}
+
 module.exports = {
   index,
   store,
   token,
+  update,
 };
