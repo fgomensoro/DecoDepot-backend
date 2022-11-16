@@ -1,6 +1,7 @@
 const { faker } = require("@faker-js/faker");
 const Product = require("../models/Product");
 const Category = require("../models/Category");
+const slugify = require("slugify");
 
 module.exports = async () => {
   const products = [];
@@ -20,7 +21,9 @@ module.exports = async () => {
       featured: feat,
       category: randomCategory,
     });
-    (product.slug = `${product.name}_${randomCategory.name}`), products.push(product);
+    (product.slug = slugify(product.name, "_") + "_" + slugify(randomCategory.name, "_")),
+      products.push(product);
+    // ACA SE TIENE QUE INSTALAR Y HACER CON SLUGIFY POR SI EL PRODUCTO O LA CATEGORÍA TIENEN MAS DE UNA PALABRA
   }
 
   await Product.insertMany(products);
