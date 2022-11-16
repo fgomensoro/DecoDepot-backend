@@ -41,7 +41,7 @@ async function store(req, res) {
       return res.json(user);
     }
   } else {
-    if (!passwordAutentication && passwordAutentication) {
+    if (!passwordAutentication) {
       return res.json({ msg: "⚠️ Password confirmation doesn't match Password " });
     } else {
       return res.json({ msg: "⚠️ User already exists" });
@@ -63,7 +63,7 @@ async function token(req, res) {
         id: user._id,
         isAdmin: user.isAdmin,
       };
-      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      const token = jwt.sign({ payload }, process.env.JWT_SECRET);
       user = {
         token: token,
         firstname: user.firstname,
