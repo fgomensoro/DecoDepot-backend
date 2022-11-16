@@ -93,6 +93,7 @@ async function update(req, res) {
     user.address = req.body.adress;
     user.phoneNumber = req.body.phoneNumber;
     user.password = hashedPassword;
+    user.isAdmin = req.body.isAdmin;
     console.log(req.body);
     user.save();
   } else {
@@ -106,9 +107,20 @@ async function update(req, res) {
   return res.json(user);
 }
 
+async function destroy(req, res) {
+  await User.findByIdAndDelete(req.params.id);
+  return res.json({ msg: "OK" });
+}
+async function show(req, res) {
+  const user = await User.findById(req.params.id);
+  return res.json(user);
+}
+
 module.exports = {
+  show,
   index,
   store,
   token,
   update,
+  destroy,
 };
