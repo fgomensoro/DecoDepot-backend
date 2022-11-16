@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const User = require("../models/User");
 
 async function index(req, res) {
   const orders = await Order.find();
@@ -7,10 +8,13 @@ async function index(req, res) {
 
 async function store(req, res) {
   const orderCreated = await Order.create({
-    name: req.body.name,
-    products: [req.body.prods],
+    user: req.auth.id,
+    products: req.body.prods,
     delivered: req.body.delivered,
   });
+
+  await User.findByIdAndUpdate({ _id: req.auth.id }, { $push: { orders: orderCreated } });
+
   res.json(orderCreated);
 }
 
@@ -22,8 +26,17 @@ async function update(req, res) {
   res.json(updatedOrder);
 }
 
+async function show(req, res) {
+  const order = await Order.findById(req.params.id).populate({
+    path: "user",
+    User,
+  });
+  res.json(order); //response.data.product
+}
+
 module.exports = {
   index,
   store,
   update,
+  show,
 };

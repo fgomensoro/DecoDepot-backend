@@ -1,7 +1,10 @@
 const { mongoose, Schema } = require("../dbInitialSetup");
 
 const orderSchema = new Schema({
-  name: String,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   products: [],
   delivered: Boolean,
 });
