@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const slugify = require("slugify");
 
 async function index(req, res) {
   const users = await User.find();
@@ -22,12 +23,13 @@ async function store(req, res) {
       isAdmin: false,
     });
     if (userCreated) {
+      userCreated.slug = slugify(`${userCreated.firstname} ${userCreated.lastname}`, "_");
       await userCreated.save();
       const payload = {
         id: userCreated._id,
         isAdmin: userCreated.isAdmin,
       };
-      const token = jwt.sign({ payload }, process.env.JWT_SECRET);
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
       const user = {
         token: token,
         firstname: userCreated.firstname,
@@ -37,6 +39,7 @@ async function store(req, res) {
         phoneNumber: userCreated.phoneNumber,
         isAdmin: userCreated.isAdmin,
         orders: [],
+        slug: userCreated.slug,
       };
       return res.json(user);
     }
@@ -63,7 +66,7 @@ async function token(req, res) {
         id: user._id,
         isAdmin: user.isAdmin,
       };
-      const token = jwt.sign({ payload }, process.env.JWT_SECRET);
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
       user = {
         token: token,
         firstname: user.firstname,
@@ -74,6 +77,7 @@ async function token(req, res) {
         isAdmin: user.isAdmin,
         id: user.id,
         orders: [],
+        slug: user.slug,
       };
       return res.json(user);
     }

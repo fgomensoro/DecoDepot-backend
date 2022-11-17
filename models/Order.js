@@ -5,8 +5,16 @@ const orderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  products: [],
-  delivered: Boolean,
+  products: Array,
+  status: {
+    type: String,
+    enum: {
+      values: ["Not paid", "Paid", "Undelivered", "Delivered"],
+      message: "This value is not supported",
+    },
+  },
+  shippingAddress: Object,
+  total: Number,
 });
 
 const Order = mongoose.model("Order", orderSchema);

@@ -15,6 +15,7 @@ const userSchema = new Schema({
       ref: "Order",
     },
   ],
+  slug: String,
 });
 
 userSchema.pre("save", function (next) {

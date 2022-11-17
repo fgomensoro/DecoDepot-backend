@@ -5,7 +5,7 @@ const { expressjwt: checkJwt } = require("express-jwt");
 const ensureIsAdmin = require("../middlewares/isAdmin");
 
 productsRouter.get("", productsController.index);
-productsRouter.get("/:id", productsController.show);
+productsRouter.get("/:slug", productsController.show);
 
 productsRouter.use(checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })),
   productsRouter.use(ensureIsAdmin);

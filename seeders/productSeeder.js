@@ -21,8 +21,8 @@ module.exports = async () => {
       featured: feat,
       category: randomCategory,
     });
-    (product.slug = slugify(product.name, "_") + "_" + slugify(randomCategory.name, "_")),
-      products.push(product);
+    product.slug = slugify(`${product.name} ${randomCategory.name}`, "_");
+    products.push(product);
     // ACA SE TIENE QUE INSTALAR Y HACER CON SLUGIFY POR SI EL PRODUCTO O LA CATEGORÍA TIENEN MAS DE UNA PALABRA
   }
 
