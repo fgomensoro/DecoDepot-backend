@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const Category = require("../models/Category");
 const formidable = require("formidable");
+const slugify = require("slugify");
 
 async function index(req, res) {
   let products;
@@ -24,24 +25,37 @@ async function store(req, res) {
     uploadDir: __dirname + "/../public/img",
   });
   form.parse(req, async (err, fields, files) => {
+    console.log(files);
+    const newImages = [];
+    if (files.image1.originalFilename) {
+      newImages.push(files.image1.newFilename);
+    }
+    if (files.image2.originalFilename) {
+      newImages.push(files.image2.newFilename);
+    }
+    if (files.image3.originalFilename) {
+      newImages.push(files.image3.newFilename);
+    }
     const searchedCategory = await Category.findById(fields.category);
     const newProduct = await Product.create({
       name: fields.name,
       description: fields.description,
-      images: [files.image1.newFilename, files.image2.newFilename, files.image3.newFilename],
+      images: newImages,
       price: fields.price,
       stock: fields.stock,
       category: searchedCategory,
       featured: fields.featured,
       slug: fields.slug,
     });
+    newProduct.slug = slugify(`${newProduct.name} ${newProduct.category.name}`, "_");
+    await newProduct.save();
 
     return res.json({ msg: "OK" });
   });
 }
 
 async function show(req, res) {
-  const product = await Product.findById(req.params.id).populate({
+  const product = await Product.findOne({ slug: req.params.slug }).populate({
     path: "category",
     Category,
   });
@@ -49,7 +63,7 @@ async function show(req, res) {
 }
 
 async function update(req, res) {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).populate({ path: "category", Category });
   if (product) {
     try {
       const form = formidable({
@@ -59,13 +73,13 @@ async function update(req, res) {
       });
       form.parse(req, async (err, fields, files) => {
         const newImages = [];
-        if (!files.image1.originalFilename) {
+        if (files.image1.originalFilename) {
           newImages.push(files.image1.newFilename);
         }
-        if (!files.image2.originalFilename) {
+        if (files.image2.originalFilename) {
           newImages.push(files.image2.newFilename);
         }
-        if (!files.image3.originalFilename) {
+        if (files.image3.originalFilename) {
           newImages.push(files.image3.newFilename);
         }
         let newCategory;
@@ -76,15 +90,14 @@ async function update(req, res) {
         product.description = fields.description;
         product.price = fields.price;
         product.stock = fields.stock;
-        product.category = newCategory || product.category;
+        product.category = newCategory ? newCategory : product.category;
         product.featured = fields.featured;
-        product.slug = fields.slug;
         if (fields.actionImages === "add") {
           product.images = [...product.images, ...newImages];
         } else {
           product.images = newImages;
         }
-
+        product.slug = slugify(`${product.name} ${product.category.name}`, "_");
         await product.save();
         return res.json({ msg: "OK" });
       });
