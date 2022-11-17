@@ -3,14 +3,10 @@ const User = require("../models/User");
 const { updateStock } = require("./productsController");
 
 async function index(req, res) {
-<<<<<<< HEAD
-  const orders = await Order.find();
-=======
   const orders = await Order.find().populate({
     path: "user",
     User,
   });
->>>>>>> a4edbeafa0d551d04e8e4ad87c9017cc6e2873c9
   res.json(orders);
 }
 

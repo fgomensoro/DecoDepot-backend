@@ -39,6 +39,7 @@ async function store(req, res) {
         phoneNumber: userCreated.phoneNumber,
         isAdmin: userCreated.isAdmin,
         orders: [],
+        slug: userCreated.slug,
       };
       return res.json(user);
     }
@@ -76,6 +77,7 @@ async function token(req, res) {
         isAdmin: user.isAdmin,
         id: user.id,
         orders: [],
+        slug: user.slug,
       };
       return res.json(user);
     }
