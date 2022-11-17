@@ -1,8 +1,16 @@
 const Order = require("../models/Order");
 const User = require("../models/User");
+const { updateStock } = require("./productsController");
 
 async function index(req, res) {
+<<<<<<< HEAD
   const orders = await Order.find();
+=======
+  const orders = await Order.find().populate({
+    path: "user",
+    User,
+  });
+>>>>>>> a4edbeafa0d551d04e8e4ad87c9017cc6e2873c9
   res.json(orders);
 }
 
@@ -10,19 +18,22 @@ async function store(req, res) {
   const orderCreated = await Order.create({
     user: req.auth.id,
     products: req.body.prods,
-    delivered: req.body.delivered,
+    status: req.body.status,
+    shippingAddress: req.body.address,
+    total: req.body.total,
   });
 
-  await User.findByIdAndUpdate({ _id: req.auth.id }, { $push: { orders: orderCreated } });
+  await User.findByIdAndUpdate(req.auth.id, { $push: { orders: orderCreated } });
 
-  res.json(orderCreated);
+  await updateStock(orderCreated.products);
+
+  res.status(201).json(orderCreated);
 }
 
 async function update(req, res) {
-  const updatedOrder = await Order.findByIdAndUpdate(
-    { _id: req.params.id },
-    { delivered: req.body.delivered },
-  );
+  const updatedOrder = await Order.findByIdAndUpdate(req.params.id, {
+    status: req.body.status,
+  });
   res.json(updatedOrder);
 }
 

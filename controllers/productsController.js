@@ -94,6 +94,34 @@ async function update(req, res) {
   }
 }
 
+// async function updateStock(products) {
+//   const ids = products.map((p) => p.id );
+//   const productsToUpdate = Product.find({id:{$in:ids}})
+
+//   for (product of productsToUpdate) {
+
+//     product.stock = product.stock -
+//     // const prod = await Product.findById(product.id);
+//     // const updatedStock = await Product.findByIdAndUpdate(product.id, {
+//     //   stock: prod.stock - product.qty,
+//     // });
+//   }
+// }
+
+async function updateStock(products) {
+  const productIdsQtyMap = products.reduce((accumulator, product) => {
+    accumulator[product.id] = product.qty;
+    return accumulator;
+  }, {});
+  console.log(productIdsQtyMap);
+  const productsToUpdate = await Product.find({ _id: { $in: Object.keys(productIdsQtyMap) } });
+  console.log(productsToUpdate);
+  for (const product of productsToUpdate) {
+    product.stock = product.stock - productIdsQtyMap[product.id];
+  }
+  await Product.bulkSave(productsToUpdate);
+}
+
 async function destroy(req, res) {
   try {
     await Product.findByIdAndDelete(req.params.id);
@@ -109,4 +137,5 @@ module.exports = {
   show,
   update,
   destroy,
+  updateStock,
 };
