@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 async function index(req, res) {
   const orders = await Order.find();
-  res.json({ orders });
+  res.json(orders);
 }
 
 async function store(req, res) {

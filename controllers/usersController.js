@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const slugify = require("slugify");
 
 async function index(req, res) {
   const users = await User.find();
@@ -22,6 +23,7 @@ async function store(req, res) {
       isAdmin: false,
     });
     if (userCreated) {
+      userCreated.slug = slugify(`${userCreated.firstname} ${userCreated.lastname}`, "_");
       await userCreated.save();
       const payload = {
         id: userCreated._id,

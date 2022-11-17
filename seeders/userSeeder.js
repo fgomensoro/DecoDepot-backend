@@ -2,6 +2,7 @@ const { faker } = require("@faker-js/faker");
 const User = require("../models/User");
 const { mongoose } = require("mongoose");
 const bcrypt = require("bcryptjs");
+const slugify = require("slugify");
 
 faker.locale = "es";
 
@@ -18,6 +19,8 @@ module.exports = async () => {
     phoneNumber: "123456789",
     isAdmin: true,
   });
+  admin.slug = slugify(`${admin.firstname} ${admin.lastname}`, "_");
+  await admin.save();
 
   for (let i = 0; i < 10; i++) {
     const user = new User({
@@ -29,6 +32,7 @@ module.exports = async () => {
       phoneNumber: "123456789",
       isAdmin: false,
     });
+    user.slug = slugify(`${user.firstname} ${user.lastname}`, "_");
     users.push(user);
   }
 

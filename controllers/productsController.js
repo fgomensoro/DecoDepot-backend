@@ -25,7 +25,7 @@ async function store(req, res) {
   });
   form.parse(req, async (err, fields, files) => {
     const searchedCategory = await Category.findById(fields.category);
-    await Product.create({
+    const newProduct = await Product.create({
       name: fields.name,
       description: fields.description,
       images: [files.image1.newFilename, files.image2.newFilename, files.image3.newFilename],
@@ -41,8 +41,6 @@ async function store(req, res) {
 }
 
 async function show(req, res) {
-  console.log("show");
-  console.log(req.params.id);
   const product = await Product.findById(req.params.id).populate({
     path: "category",
     Category,
