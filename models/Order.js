@@ -13,6 +13,8 @@ const orderSchema = new Schema({
       message: "This value is not supported",
     },
   },
+  shippingAddress: Object,
+  total: Number,
 });
 
 const Order = mongoose.model("Order", orderSchema);
