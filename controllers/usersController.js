@@ -9,7 +9,6 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-  console.log("entro al show");
   const user = await User.findById(req.auth.id);
   return res.json(user);
 }
@@ -64,7 +63,7 @@ async function token(req, res) {
     const checkPassword = await bcrypt.compare(req.body.password, user.password);
 
     if (!checkPassword) {
-      return res.json({ msg: "Invalid credentials" });
+      return res.json({ msg: "⚠️ Invalid credentials" });
     }
 
     if (checkPassword) {
@@ -88,30 +87,26 @@ async function token(req, res) {
       return res.json(user);
     }
   } catch (error) {
-    return res.status(400).json({ msg: "User not find" });
+    return res.status(400).json({ msg: "⚠️ User not find" });
   }
 }
 
 async function update(req, res) {
-  console.log("se entro al update user");
-  console.log(req.body);
-
   const user = await User.findById(req.auth.id);
-
   const checkPassword = await bcrypt.compare(req.body.currentPassword, user.password);
   if (!checkPassword) {
-    return res.json({ msg: "Invalid password" });
+    return res.json({ msg: "⚠️ Invalid password" });
   } else {
     user.email = req.body.email;
     user.address = req.body.address;
     user.phoneNumber = req.body.phoneNumber;
+    if (req.body.newPassword && req.body.newPassword === req.body.confirmNewPassword) {
+      user.password = req.body.newPassword;
+    } else if (req.body.newPassword !== req.body.confirmNewPassword) {
+      return res.json({ msg: "⚠️ Failed to confirm new password" });
+    }
   }
-  if (req.body.newPassword && req.body.newPassword === req.body.confirmNewPassword) {
-    console.log("entro al if del password");
-    user.password = req.body.newPassword;
-  } else if (req.body.newPassword !== req.body.confirmNewPassword) {
-    return res.json({ msg: "Failed to confirm new password" });
-  }
+
   user.save();
   return res.json(user);
 }
