@@ -59,6 +59,7 @@ async function show(req, res) {
     path: "category",
     Category,
   });
+  console.log(product);
   res.json(product); //response.data.product
 }
 
