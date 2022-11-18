@@ -126,9 +126,9 @@ async function updateStock(products) {
     accumulator[product.id] = product.qty;
     return accumulator;
   }, {});
-  console.log(productIdsQtyMap);
+  // console.log(productIdsQtyMap);
   const productsToUpdate = await Product.find({ _id: { $in: Object.keys(productIdsQtyMap) } });
-  console.log(productsToUpdate);
+  // console.log(productsToUpdate);
   for (const product of productsToUpdate) {
     product.stock = product.stock - productIdsQtyMap[product.id];
   }
