@@ -9,7 +9,6 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-  console.log("entro al show");
   const user = await User.findById(req.auth.id).populate("orders");
   return res.json(user);
 }
