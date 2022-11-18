@@ -11,10 +11,12 @@ module.exports = async () => {
     const order = new Order({
       user: randomUser._id,
       products: [
-        { product: "mesa", qty: 3 },
-        { product: "sofa", qty: 3 },
+        { name: "mesa", price: 50, qty: 3 },
+        { name: "sofa", price: 50, qty: 3 },
       ],
       status: "Not paid",
+      shippingAddress: { address: "calle 2", apt: "15" },
+      total: 3000,
     });
 
     await order.save();
