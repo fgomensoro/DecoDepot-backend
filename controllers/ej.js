@@ -86,7 +86,7 @@ async function token(req, res) {
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET);
-  console.log(token);
+  // console.log(token);
   res.json({
     token,
     userId: user._id,
