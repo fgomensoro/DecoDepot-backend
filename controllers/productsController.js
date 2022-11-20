@@ -81,6 +81,16 @@ async function update(req, res) {
         if (files.image3.originalFilename) {
           newImages.push(files.image3.newFilename);
         }
+        const newImages = [];
+        if (files.image1.originalFilename) {
+          newImages.push(files.image1.newFilename);
+        }
+        if (files.image2.originalFilename) {
+          newImages.push(files.image2.newFilename);
+        }
+        if (files.image3.originalFilename) {
+          newImages.push(files.image3.newFilename);
+        }
         let newCategory;
         if (fields.category) {
           newCategory = await Category.findById(fields.category);

@@ -13,7 +13,7 @@ async function index(req, res) {
 async function store(req, res) {
   const orderCreated = await Order.create({
     user: req.auth.id,
-    products: req.body.prods,
+    products: req.body.products,
     status: req.body.status,
     shippingAddress: req.body.address,
     total: req.body.total,
@@ -23,7 +23,7 @@ async function store(req, res) {
 
   await updateStock(orderCreated.products);
 
-  res.status(201).json(orderCreated);
+  return res.status(201).json(orderCreated);
 }
 
 async function update(req, res) {
