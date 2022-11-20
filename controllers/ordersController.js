@@ -11,19 +11,20 @@ async function index(req, res) {
 }
 
 async function store(req, res) {
-  const orderCreated = await Order.create({
-    user: req.auth.id,
-    products: req.body.products,
-    status: req.body.status,
-    shippingAddress: req.body.address,
-    total: req.body.total,
-  });
-
-  await User.findByIdAndUpdate(req.auth.id, { $push: { orders: orderCreated } });
-
-  await updateStock(orderCreated.products);
-
-  return res.status(201).json(orderCreated);
+  const chekStock = await updateStock(req.body.products);
+  if (chekStock) {
+    const orderCreated = await Order.create({
+      user: req.auth.id,
+      products: req.body.products,
+      status: req.body.status,
+      shippingAddress: req.body.address,
+      total: req.body.total,
+    });
+    await User.findByIdAndUpdate(req.auth.id, { $push: { orders: orderCreated } });
+    return res.status(201).json(orderCreated);
+  } else {
+    return res.json({ msg: "Sorry! We are out of sotck! Update your cart and try it again" });
+  }
 }
 
 async function update(req, res) {
