@@ -25,7 +25,6 @@ async function store(req, res) {
     uploadDir: __dirname + "/../public/img",
   });
   form.parse(req, async (err, fields, files) => {
-    console.log(files);
     const newImages = [];
     if (files.image1.originalFilename) {
       newImages.push(files.image1.newFilename);
@@ -59,7 +58,6 @@ async function show(req, res) {
     path: "category",
     Category,
   });
-  console.log(product);
   res.json(product); //response.data.product
 }
 
