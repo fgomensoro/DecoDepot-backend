@@ -7,7 +7,7 @@ const { findLastKey } = require("lodash");
 async function index(req, res) {
   let products;
   if (req.query.limit) {
-    products = await Product.find({ category: req.query.category })
+    products = await Product.find({ category: req.query.category, _id: { $ne: req.query.id } })
       .populate({ path: "category", Category })
       .limit(req.query.limit);
   } else if (req.query) {
