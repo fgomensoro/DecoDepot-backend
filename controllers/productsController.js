@@ -2,6 +2,7 @@ const Product = require("../models/Product");
 const Category = require("../models/Category");
 const formidable = require("formidable");
 const slugify = require("slugify");
+const { findLastKey } = require("lodash");
 
 async function index(req, res) {
   let products;
@@ -25,7 +26,6 @@ async function store(req, res) {
     uploadDir: __dirname + "/../public/img",
   });
   form.parse(req, async (err, fields, files) => {
-    console.log(files);
     const newImages = [];
     if (files.image1.originalFilename) {
       newImages.push(files.image1.newFilename);
@@ -59,7 +59,6 @@ async function show(req, res) {
     path: "category",
     Category,
   });
-  console.log(product);
   res.json(product); //response.data.product
 }
 
@@ -128,10 +127,20 @@ async function updateStock(products) {
     return accumulator;
   }, {});
   const productsToUpdate = await Product.find({ _id: { $in: Object.keys(productIdsQtyMap) } });
+  let outOfStock = false;
   for (const product of productsToUpdate) {
-    product.stock = product.stock - productIdsQtyMap[product.id];
+    if (product.stock < productIdsQtyMap[product.id]) {
+      outOfStock = true;
+    } else {
+      product.stock = product.stock - productIdsQtyMap[product.id];
+    }
   }
-  await Product.bulkSave(productsToUpdate);
+  if (outOfStock) {
+    return false;
+  } else {
+    await Product.bulkSave(productsToUpdate);
+    return true;
+  }
 }
 
 async function destroy(req, res) {
