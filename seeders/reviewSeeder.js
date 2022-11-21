@@ -8,7 +8,7 @@ module.exports = async () => {
     "Great solutions, small costs",
     "All you need to renewing your house is here",
   ];
-  const authors = ["The New York Times", "Artdeco Magazine", "Elon Musk", "El loco Abreu"];
+  const authors = ["The New York Times", "Artdeco Magazine", "Home Magazine", "Modern design"];
   for (let i = 0; i < reviews.length; i++) {
     const review = new Review({
       comment: reviews[i],
