@@ -27,13 +27,16 @@ async function store(req, res) {
   });
   form.parse(req, async (err, fields, files) => {
     const newImages = [];
-    if (files.image1.originalFilename) {
+    if (files.image1.originalFilename.length > 0) {
+      console.log(1);
       newImages.push(files.image1.newFilename);
     }
-    if (files.image2.originalFilename) {
+    if (files.image2.originalFilename.length > 0) {
+      console.log(2);
       newImages.push(files.image2.newFilename);
     }
-    if (files.image3.originalFilename) {
+    if (files.image3.originalFilename.length > 0) {
+      console.log(3);
       newImages.push(files.image3.newFilename);
     }
     const searchedCategory = await Category.findById(fields.category);
@@ -63,46 +66,56 @@ async function show(req, res) {
 }
 
 async function update(req, res) {
-  const product = await Product.findById(req.params.id).populate({ path: "category", Category });
-  if (product) {
-    try {
-      const form = formidable({
-        multiples: true,
-        keepExtensions: true,
-        uploadDir: __dirname + "/../public/img",
-      });
-      form.parse(req, async (err, fields, files) => {
-        const newImages = [];
-        if (files.image1.originalFilename) {
-          newImages.push(files.image1.newFilename);
-        }
-        if (files.image2.originalFilename) {
-          newImages.push(files.image2.newFilename);
-        }
-        if (files.image3.originalFilename) {
-          newImages.push(files.image3.newFilename);
-        }
-        let newCategory;
-        if (fields.category) {
-          newCategory = await Category.findById(fields.category);
-        }
-        product.name = fields.name;
-        product.description = fields.description;
-        product.price = fields.price;
-        product.stock = fields.stock;
-        product.category = newCategory ? newCategory : product.category;
-        product.featured = fields.featured;
-        if (fields.actionImages === "add") {
-          product.images = [...product.images, ...newImages];
-        } else {
-          product.images = newImages;
-        }
-        product.slug = slugify(`${product.name} ${product.category.name}`, "_");
-        await product.save();
-        return res.json({ msg: "OK" });
-      });
-    } catch (err) {
-      return res.status(404).json({ msg: "Failed to update product" });
+  if (req.body.updateIsFeatured && req.auth.isAdmin) {
+    const product = await Product.findById(req.params.id);
+    product.featured = req.body.isFeatured;
+    await product.save();
+    return res.json({ msg: "Product updated" });
+  }
+  if (!req.body.updateIsFeatured) {
+    const product = await Product.findById(req.params.id).populate({ path: "category", Category });
+    if (product) {
+      try {
+        const form = formidable({
+          multiples: true,
+          keepExtensions: true,
+          uploadDir: __dirname + "/../public/img",
+        });
+        form.parse(req, async (err, fields, files) => {
+          const newImages = [];
+          if (files.image1.originalFilename.length > 0) {
+            newImages.push(files.image1.newFilename);
+          }
+          if (files.image2.originalFilename.length > 0) {
+            newImages.push(files.image2.newFilename);
+          }
+          if (files.image3.originalFilename.length > 0) {
+            newImages.push(files.image3.newFilename);
+          }
+          let newCategory;
+          if (fields.category) {
+            newCategory = await Category.findById(fields.category);
+          }
+          product.name = fields.name;
+          product.description = fields.description;
+          product.price = fields.price;
+          product.stock = fields.stock;
+          product.category = newCategory ? newCategory : product.category;
+          product.slug = fields.slug;
+          if (fields.actionImages === "add") {
+            console.log(newImages);
+            console.log(product.images);
+            product.images += [...newImages];
+          } else {
+            product.images = newImages;
+          }
+          product.slug = slugify(`${product.name} ${product.category.name}`, "_");
+          await product.save();
+          return res.json({ msg: "OK" });
+        });
+      } catch (err) {
+        return res.status(404).json({ msg: "Failed to update product" });
+      }
     }
   }
 }
