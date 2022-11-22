@@ -8,7 +8,68 @@ module.exports = async () => {
   const categories = await Category.find();
 
   // ================ Chairs ============================================
+  await Product.create({
+    name: "Pica Chair",
+    description: `Pica is an ideal companion chair that warmly embraces the Burrow ethos: supremely comfortable, veritably stylish, and of course, incredibly easy to set up. The rounded silhouette and plush materials invite lengthy sessions of curling up and zoning out, while the petite footprint allows it to find a home in any nook or corner. The perfect balance of comfort and form, Pica makes a cozy compliment to a sofa, beside the bed, or paired up in front of a fireplace.`,
+    images: ["Pica_Chair_2.jpg", "Pica_Chair_1.jpg", "Pica_Chair_3.jpg"],
+    price: 880,
+    stock: 16,
+    featured: true,
+    category: categories[1],
+    slug: "Pica_Chair",
+  });
 
+  await Product.create({
+    name: "Lodge Chair",
+    description: `Despite the suave familiarity of the Danish mid-century aesthetic, the Lodge Chair is unlike any other out there. The handsome carpentry and premium upholstery make it a conversation starter in any room, but the quiet design features make it truly worthy of admiration. From the gentle pitch of the seat to the width of the armrest, every aspect of Lodge has been meticulously considered and refined, so it's not just beautiful, it's functional and comfortable too.`,
+    images: ["Lodge_Chair_1.jpg", "Lodge_Chair_2.jpg", "Lodge_Chair_3.jpg"],
+    price: 990,
+    stock: 12,
+    featured: false,
+    category: categories[1],
+    slug: "Lodge_Chair",
+  });
+
+  await Product.create({
+    name: "Vesper Wood & Leather Lounge Chair",
+    description: `Vesper is a visually striking, statement design that still meets our high standard for functionality. It builds upon a long legacy of molded plywood lounge chairs, and takes a step beyond homage: the custom-pressed shell was engineered to offer a comfortably reclined seat, but also to nest for efficient shipping and easy setup — just the sort of thoughtful touch you've come to expect from Burrow.`,
+    images: [
+      "Vesper_Wood_and_Leather_Lounge_Chair_1.jpg",
+      "Vesper_Wood_and_Leather_Lounge_Chair_2.jpg",
+      "Vesper_Wood_and_Leather_Lounge_Chair_3.jpg",
+    ],
+    price: 770,
+    stock: 8,
+    featured: false,
+    category: categories[1],
+    slug: "Vesper_Wood_and_Leather_Lounge_Chair",
+  });
+
+  await Product.create({
+    name: "Airi Office Chair",
+    description: `The first officer to our Pilot Desk, Airi is a breathable, professional-grade office chair. It features a mesh back that prevents the dreaded, all-too-familiar lower back dampness. The frame has four legs with casters, and a pneumatic rising base that can tilt or lock in place. Designed and manufactured by Eurostyle, Airi is contract-grade and built with BIFMA-approved components.`,
+    images: ["Airi_Office_Chair_1.jpg", "Airi_Office_Chair_2.jpg", "Airi_Office_Chair_3.jpg"],
+    price: 395,
+    stock: 4,
+    featured: false,
+    category: categories[1],
+    slug: "Airi_Office_Chair",
+  });
+
+  await Product.create({
+    name: "Range 2-Piece Lounger",
+    description: `A seat module paired with an attached ottoman in a classic 'chaise longue' configuration. Stretch out in a home office, or add a table for a movie room recliner setup. Range is our vision for a plush, comfortable seating system that’s perfect for everything from streaming marathons to afternoon napping, balanced with a bold, contemporary design statement with a low profile and clean, sophisticated lines.`,
+    images: [
+      "Range_2_Piece_Lounger_1.jpg",
+      "Range_2_Piece_Lounger_2.jpg",
+      "Range_2_Piece_Lounger_3.jpg",
+    ],
+    price: 695,
+    stock: 10,
+    featured: true,
+    category: categories[1],
+    slug: "Range_2_Piece_Lounger",
+  });
   // ================ Sofas =============================================
 
   await Product.create({
