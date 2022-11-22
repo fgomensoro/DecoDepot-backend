@@ -7,6 +7,10 @@ module.exports = async () => {
   const products = [];
   const categories = await Category.find();
 
+  // ================ Chairs ============================================
+
+  // ================ Sofas =============================================
+
   await Product.create({
     name: "Block Nomad Sofa",
     description: `The cornerstone of our Nomad Collection is the essential sofa reinvented for modern life. The first truly easy-to-move sofa thanks to our award-winning modular design; it has plenty of room for three people, or more if you're into cuddling. It's packed with all the clever, life-changing features you expect from Burrow, starting with a built-in USB charger.`,

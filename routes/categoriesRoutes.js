@@ -5,5 +5,6 @@ const { expressjwt: checkJwt } = require("express-jwt");
 
 categoriesRouter.get("/", categoriesController.index);
 
-categoriesRouter.use(checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })),
-  (module.exports = categoriesRouter);
+categoriesRouter.use(checkJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }));
+
+module.exports = categoriesRouter;
