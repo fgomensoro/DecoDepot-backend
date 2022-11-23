@@ -2,8 +2,10 @@ const { faker } = require("@faker-js/faker");
 const Product = require("../models/Product");
 const Category = require("../models/Category");
 const slugify = require("slugify");
+const { mongoose } = require("../dbInitialSetup");
 
 module.exports = async () => {
+  await mongoose.connection.dropCollection("products");
   const products = [];
   const categories = await Category.find();
 

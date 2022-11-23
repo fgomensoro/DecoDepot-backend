@@ -1,9 +1,10 @@
 const { faker } = require("@faker-js/faker");
 const Order = require("../models/Order");
 const User = require("../models/User");
-const { mongoose } = require("mongoose");
+const { mongoose } = require("../dbInitialSetup");
 
 module.exports = async () => {
+  await mongoose.connection.dropCollection("orders");
   const user = await User.find();
   const randomUser = user[faker.datatype.number({ min: 0, max: user.length - 1 })];
   const orders = ["1", "2", "3", "4"];

@@ -1,13 +1,13 @@
 const { faker } = require("@faker-js/faker");
 const User = require("../models/User");
-const { mongoose } = require("mongoose");
 const bcrypt = require("bcryptjs");
 const slugify = require("slugify");
+const { mongoose } = require("../dbInitialSetup");
 
 faker.locale = "es";
 
 module.exports = async () => {
-  await mongoose.connection.dropDatabase();
+  await mongoose.connection.dropCollection("users");
   const users = [];
 
   const admin = new User({

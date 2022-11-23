@@ -1,7 +1,9 @@
 const { faker } = require("@faker-js/faker");
 const Review = require("../models/Review");
+const { mongoose } = require("../dbInitialSetup");
 
 module.exports = async () => {
+  await mongoose.connection.dropCollection("reviews");
   const reviews = [
     "The best designs for your home",
     "The most original and modern designs in the market",

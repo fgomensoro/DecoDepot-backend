@@ -1,8 +1,10 @@
 const Product = require("../models/Product");
 const Combo = require("../models/Combo");
 const { faker } = require("@faker-js/faker");
+const { mongoose } = require("../dbInitialSetup");
 
 module.exports = async () => {
+  await mongoose.connection.dropCollection("combos");
   for (let i = 0; i < 2; i++) {
     const products = await Product.find();
     const randomProduct = products[faker.datatype.number({ min: 0, max: products.length - 1 })];

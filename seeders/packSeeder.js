@@ -1,8 +1,10 @@
 const Product = require("../models/Product");
 const Pack = require("../models/Pack");
 const { faker } = require("@faker-js/faker");
+const { mongoose } = require("../dbInitialSetup");
 
 module.exports = async () => {
+  await mongoose.connection.dropCollection("packs");
   const products = await Product.find();
 
   await Pack.create({
@@ -25,7 +27,7 @@ module.exports = async () => {
     bigImage2: "pack2_bigImage_2.jpeg",
     products: [products[4], products[5], products[6], products[7]],
   });
-  
+
   await Pack.create({
     name: "Traditional Living Room",
     bigImage: "pack2_bigImage_1.jpeg",
