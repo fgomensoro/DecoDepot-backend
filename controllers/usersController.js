@@ -23,7 +23,7 @@ async function store(req, res) {
       lastname: req.body.lastname,
       email: req.body.email,
       address: req.body.address,
-      password: hashedPassword,
+      password: req.body.password,
       phoneNumber: req.body.phoneNumber,
       isAdmin: false,
     });
