@@ -3,6 +3,10 @@ const Category = require("../models/Category");
 const formidable = require("formidable");
 const slugify = require("slugify");
 const { findLastKey } = require("lodash");
+const { createClient } = require("@supabase/supabase-js");
+const fs = require("fs");
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 async function index(req, res) {
   let products;
@@ -27,17 +31,21 @@ async function store(req, res) {
   });
   form.parse(req, async (err, fields, files) => {
     const newImages = [];
-    if (files.image1.originalFilename.length > 0) {
-      console.log(1);
-      newImages.push(files.image1.newFilename);
-    }
-    if (files.image2.originalFilename.length > 0) {
-      console.log(2);
-      newImages.push(files.image2.newFilename);
-    }
-    if (files.image3.originalFilename.length > 0) {
-      console.log(3);
-      newImages.push(files.image3.newFilename);
+    for (let i = 1; i <= 3; i++) {
+      if (files["image" + i].originalFilename.length > 0) {
+        const { data, error } = await supabase.storage
+          .from("bucket")
+          .upload(
+            files["image" + i].newFilename,
+            fs.createReadStream(files["image" + i].filepath),
+            {
+              cacheControl: "3600",
+              upsert: false,
+              contentType: files["image" + i].mimetype,
+            },
+          );
+        newImages.push(files["image" + i].newFilename);
+      }
     }
     const searchedCategory = await Category.findById(fields.category);
     const newProduct = await Product.create({
@@ -79,19 +87,26 @@ async function update(req, res) {
         const form = formidable({
           multiples: true,
           keepExtensions: true,
-          uploadDir: __dirname + "/../public/img",
         });
         form.parse(req, async (err, fields, files) => {
           const newImages = [];
-          if (files.image1.originalFilename.length > 0) {
-            newImages.push(files.image1.newFilename);
+          for (let i = 1; i <= 3; i++) {
+            if (files["image" + i].originalFilename.length > 0) {
+              const { data, error } = await supabase.storage
+                .from("bucket")
+                .upload(
+                  files["image" + i].newFilename,
+                  fs.createReadStream(files["image" + i].filepath),
+                  {
+                    cacheControl: "3600",
+                    upsert: false,
+                    contentType: files["image" + i].mimetype,
+                  },
+                );
+              newImages.push(files["image" + i].newFilename);
+            }
           }
-          if (files.image2.originalFilename.length > 0) {
-            newImages.push(files.image2.newFilename);
-          }
-          if (files.image3.originalFilename.length > 0) {
-            newImages.push(files.image3.newFilename);
-          }
+
           let newCategory;
           if (fields.category) {
             newCategory = await Category.findById(fields.category);
@@ -103,9 +118,7 @@ async function update(req, res) {
           product.category = newCategory ? newCategory : product.category;
           product.slug = fields.slug;
           if (fields.actionImages === "add") {
-            console.log(newImages);
-            console.log(product.images);
-            product.images += [...newImages];
+            product.images.push(...newImages);
           } else {
             product.images = newImages;
           }
