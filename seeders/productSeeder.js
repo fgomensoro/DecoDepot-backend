@@ -230,7 +230,7 @@ module.exports = async () => {
     ],
     price: 6200,
     stock: 3,
-    featured: true,
+    featured: false,
     category: categories[0],
     slug: "T_brace_Rectangular_Extension_Dining_Table",
   });
@@ -321,7 +321,7 @@ module.exports = async () => {
     ],
     price: 5190,
     stock: 5,
-    featured: true,
+    featured: false,
     category: categories[2],
     slug: "Cayden_Campaign_Fabric_Panel_Bed_With_Footboard",
   });
@@ -405,7 +405,7 @@ module.exports = async () => {
     ],
     price: 880,
     stock: 16,
-    featured: true,
+    featured: false,
     category: categories[1],
     slug: "Aegean_Teak_Lounge_Chair",
   });
@@ -473,7 +473,7 @@ module.exports = async () => {
     ],
     price: 1670,
     stock: 3,
-    featured: true,
+    featured: false,
     category: categories[3],
     slug: "Belgian_Track_Arm_Slipcovered_Sofa",
   });
