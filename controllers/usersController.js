@@ -17,7 +17,7 @@ async function store(req, res) {
   const userAutentication = await User.findOne({ email: req.body.email });
   const passwordAutentication = req.body.password === req.body.confirmPassword;
   if (!userAutentication && passwordAutentication) {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    // const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const userCreated = await User.create({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
