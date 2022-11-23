@@ -15,7 +15,7 @@ module.exports = async () => {
     lastname: "admin",
     email: "admin@admin.com",
     address: "street 1234",
-    password: "1",
+    password: "password",
     phoneNumber: "123456789",
     isAdmin: true,
   });
