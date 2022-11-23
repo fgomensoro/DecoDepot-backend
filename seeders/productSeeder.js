@@ -7,7 +7,142 @@ module.exports = async () => {
   const products = [];
   const categories = await Category.find();
 
+  // ===================================== PACKS - COMBOS =====================================
+
+  // ============== PACK - 1 ===============
+
+  await Product.create({
+    name: "Anton Leather Chaise",
+    description:
+      "Deeply inspired by modern Brooklyn lofts, the brown suede 3/4 seater right-hand corner sofa is designed for interiors with a raw, authentic style. The simple lines and generous shapes of this industrial corner sofa make it an ideal place to receive your loved ones, lounge around while enjoying your favorite series or simply relax after a long day. And what's its little plus? It is available in several colors to meet all decorative needs.",
+    images: [
+      "anton_leather_chaise_1.jpeg",
+      "anton_leather_chaise_2.jpeg",
+      "anton_leather_chaise_3.jpeg",
+    ],
+    price: 5798,
+    stock: 15,
+    featured: false,
+    category: categories[3],
+    slug: "anton_leather_chaise",
+  });
+
+  await Product.create({
+    name: "Crescent Swivel Chair",
+    description:
+      "Its welcoming silhouette that wraps around your body to create a hug-like feel, this Joyner chair will bring in much-needed comfort and style into your home. Its neutral color makes it easy to transition into any room. Featuring a 360-Degree swivel base that adds convenience. The foam seat will make you think you're on cloud 9. With a 22-inch seat depth, it's easy to curl up with your favorite book, sit back and relax.",
+    images: [
+      "crescent_swivel_chair_1.jpeg",
+      "crescent_swivel_chair_2.jpeg",
+      "crescent_swivel_chair_3.jpeg",
+    ],
+    price: 890,
+    stock: 15,
+    featured: false,
+    category: categories[1],
+    slug: "crescent_swivel_chair",
+  });
+
+  await Product.create({
+    name: "Monti Lava Stone Coffee Table",
+    description:
+      "Made of lava stone that has been dexterously covered in some parts in concrete, the Cocktail Table is weighty and earnest. In a Polished Concrete finish, this table is built to endure and can be placed in the garden or indoors. Hairline cracks occur and are part of the natural beauty and uniqueness of each piece. These are part of the natural curing process, but they do not affect durability or structural integrity because of the steel frame underneath.",
+    images: [
+      "monti_lava_stone_coffee_table_1.jpeg",
+      "monti_lava_stone_coffee_table_2.jpeg",
+      "monti_lava_stone_coffee_table_3.jpeg",
+    ],
+    price: 599,
+    stock: 15,
+    featured: false,
+    category: categories[0],
+    slug: "monti_lava_stone_coffee_table",
+  });
+
+  await Product.create({
+    name: "Diego Olivero Terracotta",
+    description:
+      "This geometric vase has a heart-shaped design which is romantic and warm. It also has geometric structure and stable load. this vase is suitable for living room, kitchen, balcony, bedroom, dining table, hotel and other places. It is durable and has good appearance and more connotation.",
+    images: [
+      "diego_olivero_terracotta_vases_1.jpeg",
+      "diego_olivero_terracotta_vases_2.jpeg",
+      "diego_olivero_terracotta_vases_3.jpeg",
+    ],
+    price: 60,
+    stock: 15,
+    featured: false,
+    category: categories[4],
+    slug: "diego_olivero_terracotta_vases",
+  });
+
+  // ============== PACK - 2 ===============
+
+  await Product.create({
+    name: "Harmony Modular Sofa",
+    description:
+      "This iconic sofa from the collection is characterized by generous proportions. The corners of the sofa's upper arm are cushion-shaped, the main inspiration of the collection. The shape of the backrest is molded until it reaches the armrest where its thickness is reduced, converging into a delicate silhouette that embraces its occupants.",
+    images: [
+      "harmony_modular_sofa_1.jpeg",
+      "harmony_modular_sofa_2.jpeg",
+      "harmony_modular_sofa_3.jpeg",
+    ],
+    price: 2399,
+    stock: 15,
+    featured: false,
+    category: categories[3],
+    slug: "harmony_modular_sofa_1",
+  });
+
+  await Product.create({
+    name: "Double Channeled Swivel Chair",
+    description:
+      "Atop a 360-degree swivel, cleanly shaped seating is upholstered in cream-colored high-performance fabric, for a sensible spin on modern styling. Performance fabrics are specially created to withstand spills, stains, high traffic and wear, ensuring long-term comfort and unmatched durability.",
+    images: [
+      "double_channeled_swivel_chair_1.jpeg",
+      "double_channeled_swivel_chair_2.jpeg",
+      "double_channeled_swivel_chair_3.jpeg",
+    ],
+    price: 999,
+    stock: 15,
+    featured: false,
+    category: categories[3],
+    slug: "double_channeled_swivel_chair",
+  });
+
+  await Product.create({
+    name: "Solstice Coffee Table",
+    description:
+      "A simple design and a standout piece in any space. This round horseshoe shaped coffee table, while elegant, adds space to place your favorite drinks and books. The table is made of flexible plywood with solid wood bracing for support. This particular striping has been left raw in color and finished with a satin water-based polyethylene for protection.",
+    images: [
+      "solstice_coffee_table_1.jpeg",
+      "solstice_coffee_table_2.jpeg",
+      "solstice_coffee_table_3.jpeg",
+    ],
+    price: 799,
+    stock: 15,
+    featured: false,
+    category: categories[0],
+    slug: "solstice_coffee_table_1",
+  });
+
+  await Product.create({
+    name: "Irving Wood Table Lamp",
+    description:
+      "This one-of-a-kind lamp is made from the tropical hardwood Cupesí. This lamp is an excellent choice to place in the living room, bedrooms and all kinds of modern environments thanks to its integration of colors. Modern thanks to its integration of colors that combine with the latest trends in the world of decoration.",
+    images: [
+      "irving_wood_table_lamp_1.jpeg",
+      "irving_wood_table_lamp_2.jpeg",
+      "irving_wood_table_lamp_3.jpeg",
+    ],
+    price: 549,
+    stock: 15,
+    featured: false,
+    category: categories[4],
+    slug: "irving_wood_table_lamp_1",
+  });
+
   // ================ Chairs ============================================
+
   await Product.create({
     name: "Pica Chair",
     description: `Pica is an ideal companion chair that warmly embraces the Burrow ethos: supremely comfortable, veritably stylish, and of course, incredibly easy to set up. The rounded silhouette and plush materials invite lengthy sessions of curling up and zoning out, while the petite footprint allows it to find a home in any nook or corner. The perfect balance of comfort and form, Pica makes a cozy compliment to a sofa, beside the bed, or paired up in front of a fireplace.`,
@@ -170,7 +305,6 @@ module.exports = async () => {
     });
     product.slug = slugify(`${product.name} ${randomCategory.name}`, "_");
     products.push(product);
-    // ACA SE TIENE QUE INSTALAR Y HACER CON SLUGIFY POR SI EL PRODUCTO O LA CATEGORÍA TIENEN MAS DE UNA PALABRA
   }
 
   await Product.insertMany(products);
