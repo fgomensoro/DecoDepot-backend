@@ -3,7 +3,7 @@ const Category = require("../models/Category");
 const { mongoose } = require("mongoose");
 
 module.exports = async () => {
-  const categories = ["Table", "Chair", "Bed", "Sofa", "Décor"];
+  const categories = ["Tables", "Chairs", "Beds", "Sofas", "Décor"];
   for (let i = 0; i < categories.length; i++) {
     const category = new Category({
       name: categories[i],
