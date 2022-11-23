@@ -18,7 +18,7 @@ module.exports = async () => {
 
     const pack = new Pack({
       name: `pack${i + 1}`,
-      bigImage: `bigImage_${i + 1}.jpg`,
+      bigImage: `bigImage_${i + 2}.jpg`,
       products: [...randomProducts],
     });
 
