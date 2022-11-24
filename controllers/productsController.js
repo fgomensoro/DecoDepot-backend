@@ -27,7 +27,6 @@ async function store(req, res) {
   const form = formidable({
     multiples: true,
     keepExtensions: true,
-    uploadDir: __dirname + "/../public/img",
   });
   form.parse(req, async (err, fields, files) => {
     const newImages = [];
