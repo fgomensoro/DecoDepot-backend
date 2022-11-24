@@ -132,20 +132,6 @@ async function update(req, res) {
   }
 }
 
-// async function updateStock(products) {
-//   const ids = products.map((p) => p.id );
-//   const productsToUpdate = Product.find({id:{$in:ids}})
-
-//   for (product of productsToUpdate) {
-
-//     product.stock = product.stock -
-//     // const prod = await Product.findById(product.id);
-//     // const updatedStock = await Product.findByIdAndUpdate(product.id, {
-//     //   stock: prod.stock - product.qty,
-//     // });
-//   }
-// }
-
 async function updateStock(products) {
   const productIdsQtyMap = products.reduce((accumulator, product) => {
     accumulator[product.id] = product.qty;

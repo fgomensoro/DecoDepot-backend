@@ -22,6 +22,18 @@ module.exports = async () => {
   admin.slug = slugify(`${admin.firstname} ${admin.lastname}`, "_");
   await admin.save();
 
+  const user = new User({
+    firstname: "random",
+    lastname: "user",
+    email: "random@user.com",
+    address: "street 1234",
+    password: "password",
+    phoneNumber: "123456789",
+    isAdmin: false,
+  });
+  user.slug = slugify(`${user.firstname} ${user.lastname}`, "_");
+  await user.save();
+
   for (let i = 0; i < 10; i++) {
     const user = new User({
       firstname: faker.name.firstName(),
