@@ -14,9 +14,9 @@ module.exports = async () => {
   });
 
   await Pack.create({
-    name: "Minimalistic Living Room",
-    bigImage: "pack2_bigImage_1.jpeg",
-    bigImage2: "pack2_bigImage_2.jpeg",
+    name: "Modern Living Room",
+    bigImage: "pack22_bigImage_1.jpeg",
+    bigImage2: "pack22_bigImage_2.jpeg",
     products: [products[4], products[5], products[6], products[7]],
   });
 
@@ -28,10 +28,10 @@ module.exports = async () => {
   });
 
   await Pack.create({
-    name: "Traditional Living Room",
-    bigImage: "pack2_bigImage_1.jpeg",
-    bigImage2: "pack2_bigImage_2.jpeg",
-    products: [products[4], products[5], products[6], products[7]],
+    name: "Simple Living Room",
+    bigImage: "pack4_bigImage_1.jpeg",
+    bigImage2: "pack4_bigImage_2.jpeg",
+    products: [products[12], products[13], products[14], products[15]],
   });
 
   console.log("[Database] Se corrió el seeder de Pack.");

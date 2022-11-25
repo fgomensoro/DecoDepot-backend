@@ -204,6 +204,72 @@ module.exports = async () => {
     slug: "irving_wood_table_lamp",
   });
 
+  // ============== PACK - 4 ===============
+
+  await Product.create({
+    name: "Haven Bumper Chaise Sectional",
+    description:
+      "Ideal to complete the spaces of your home and that no one is left out when it comes to enjoy a great day. Its ergonomics, foam thickness and softness of the fabric will not go unnoticed in your home, it is the space where you will want to spend all day. ",
+    images: [
+      "haven_2_piece_bumper_chaise_1.jpeg",
+      "haven_2_piece_bumper_chaise_2.jpeg",
+      "haven_2_piece_bumper_chaise_3.jpeg",
+    ],
+    price: 3500,
+    stock: 15,
+    featured: false,
+    category: categories[3],
+    slug: "haven_2_piece_bumper_chaise",
+  });
+
+  await Product.create({
+    name: "Woven Wicker Outdoor Chair",
+    description:
+      "Great texture for the great outdoors. Woven all-weather wicker forms a light, hyacinth-like frame for a durable ivory seat cushion, spurring a grand, shapely look and feel. Cover or store indoors during inclement weather and when not in use.",
+    images: [
+      "woven_wicker_outdoor_chair_1.jpeg",
+      "woven_wicker_outdoor_chair_2.jpeg",
+      "woven_wicker_outdoor_chair_3.jpeg",
+    ],
+    price: 1099,
+    stock: 15,
+    featured: false,
+    category: categories[1],
+    slug: "woven_wicker_outdoor_chair",
+  });
+
+  await Product.create({
+    name: "Yvette Woven Tall Cabinet",
+    description:
+      "With its two large storage spaces and its shelf, Yvette allows you to store clothes, dishes, books, trinkets.... In short, everything you want. This beautiful sideboard, with its solid natural pine structure, is, in fact, perfectly functional. It is also sober and elegant. Exotic too. Its two doors and its rattan shelf bring a bit of the atmosphere that reigns in some faraway places, especially in Southeast Asia. Or how to travel, far away without leaving your sofa.",
+    images: [
+      "yvette_tall_cabinet_1.jpeg",
+      "yvette_tall_cabinet_2.jpeg",
+      "yvette_tall_cabinet_3.jpeg",
+    ],
+    price: 979,
+    stock: 15,
+    featured: false,
+    category: categories[4],
+    slug: "yvette_tall_cabinet",
+  });
+
+  await Product.create({
+    name: "Overarching Curvilinear Mid-Century Floor Lamp",
+    description:
+      "Modern luminaire design. The combination of metal and marble gives it a touch of contemporary elegance. With steel tube structure with brass tops available in various finishes; unvarnished, black, green, brass, blue and curry. The lampshade is conical in glass and adopts a LED light source.",
+    images: [
+      "overarching_curvilinear_1.jpeg",
+      "overarching_curvilinear_2.jpeg",
+      "overarching_curvilinear_3.jpeg",
+    ],
+    price: 319,
+    stock: 15,
+    featured: false,
+    category: categories[4],
+    slug: "overarching_curvilinear_floor_lamp",
+  });
+
   // ================ Tables ============================================
 
   await Product.create({
