@@ -79,6 +79,68 @@ module.exports = async () => {
   // ============== PACK - 2 ===============
 
   await Product.create({
+    name: "Lucia Wing Chair",
+    description:
+      "Lucia Wing Chair is an armchair with soft, enveloping curves. Made of FSC™ certified solid wood, upholstered in leather or fabric, it can also be equipped with an optional headrest in leather or matching fabric.",
+    images: [
+      "lucia_wing_chair_metal_legs_1.jpeg",
+      "lucia_wing_chair_metal_legs_2.jpeg",
+      "lucia_wing_chair_metal_legs_3.jpeg",
+    ],
+    price: 799,
+    stock: 15,
+    featured: false,
+    category: categories[1],
+    slug: "Lucia_Wing_Chair",
+  });
+
+  await Product.create({
+    name: "Aluminum Flat Leg Coffee Table",
+    description:
+      "Blending industrial styling with a more organic shape, the Aluminum Flat Leg Coffee Table coffee table is a unique add-on to the living room. The table tops oval shaping and worn in lines bring in a natural and aged aesthetic to its metal structure.",
+    images: [
+      "aluminum_flat_leg_coffee_table_1.jpeg",
+      "aluminum_flat_leg_coffee_table_2.jpeg",
+      "aluminum_flat_leg_coffee_table_3.jpeg",
+    ],
+    price: 997,
+    stock: 15,
+    featured: false,
+    category: categories[0],
+    slug: "Aluminum_Flat_Leg_Coffee_Table",
+  });
+
+  await Product.create({
+    name: "Form Studies Ceramic Vases",
+    description:
+      "Our Form Studies Ceramic Vases feature a rough texture with a color fading effect. They have a design that can go with many different styles, such as farmhouse, Nordic, Scandinavian, etc. They are great ceramic pots for houseplants, ground plants, fresh flowers, and artificial flowers, and can even be used as small pots for simple decoration of family dining tables.",
+    images: ["form_studies_vases_1.jpeg", "form_studies_vases_2.jpeg", "form_studies_vases_3.jpeg"],
+    price: 40,
+    stock: 15,
+    featured: false,
+    category: categories[4],
+    slug: "Form_Studies_Ceramic_Vases",
+  });
+
+  await Product.create({
+    name: "Foundations Marble Trays",
+    description:
+      "Honed Arabascato marble is imported from Italy and hand-carved into serving tray designed by Jennifer Fisher. Beautiful, light to dark grey veining will vary in intensity from piece to piece. The larger scale is perfect for serving charcuterie, but as Jennifer notes. This works as a great tray anywhere in your house. Use this in your kitchen, use this in your bathroom, use this in your closet. It's not confined to food.",
+    images: [
+      "foundations_marble_trays_1.jpeg",
+      "foundations_marble_trays_2.jpeg",
+      "foundations_marble_trays_3.jpeg",
+    ],
+    price: 38,
+    stock: 15,
+    featured: false,
+    category: categories[4],
+    slug: "foundations_marble_trays",
+  });
+
+  // ============== PACK - 3 ===============
+
+  await Product.create({
     name: "Harmony Modular Sofa",
     description:
       "This iconic sofa from the collection is characterized by generous proportions. The corners of the sofa's upper arm are cushion-shaped, the main inspiration of the collection. The shape of the backrest is molded until it reaches the armrest where its thickness is reduced, converging into a delicate silhouette that embraces its occupants.",
