@@ -1,6 +1,5 @@
 const { faker } = require("@faker-js/faker");
 const User = require("../models/User");
-const bcrypt = require("bcryptjs");
 const slugify = require("slugify");
 const { mongoose } = require("../dbInitialSetup");
 

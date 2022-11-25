@@ -39,7 +39,7 @@ async function show(req, res) {
     path: "user",
     User,
   });
-  res.json(order); //response.data.product
+  res.json(order);
 }
 
 module.exports = {

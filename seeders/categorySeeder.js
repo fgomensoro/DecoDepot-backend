@@ -1,4 +1,3 @@
-const { faker } = require("@faker-js/faker");
 const Category = require("../models/Category");
 const { mongoose } = require("../dbInitialSetup");
 
