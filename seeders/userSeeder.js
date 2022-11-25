@@ -23,10 +23,10 @@ module.exports = async () => {
   await admin.save();
 
   const user = new User({
-    firstname: "random",
-    lastname: "user",
-    email: "random@user.com",
-    address: "street 1234",
+    firstname: "Testing",
+    lastname: "User",
+    email: "testing@user.com",
+    address: "Street 12",
     password: "password",
     phoneNumber: "123456789",
     isAdmin: false,
