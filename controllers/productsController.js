@@ -2,7 +2,6 @@ const Product = require("../models/Product");
 const Category = require("../models/Category");
 const formidable = require("formidable");
 const slugify = require("slugify");
-const { findLastKey } = require("lodash");
 const { createClient } = require("@supabase/supabase-js");
 const fs = require("fs");
 
@@ -69,7 +68,7 @@ async function show(req, res) {
     path: "category",
     Category,
   });
-  res.json(product); //response.data.product
+  res.json(product);
 }
 
 async function update(req, res) {
