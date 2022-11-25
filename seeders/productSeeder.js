@@ -205,6 +205,71 @@ module.exports = async () => {
     slug: "irving_wood_table_lamp",
   });
 
+  // ============== PACK - 4 ===============
+
+  await Product.create({
+    name: "Harmony Modular Sofa",
+    description:
+      "",
+    images: [
+      "harmony_modular_sofa_1.jpeg",
+     
+    ],
+    price: 2399,
+    stock: 15,
+    featured: false,
+    category: categories[3],
+    slug: "harmony_modular_sofa",
+  });
+
+  await Product.create({
+    name: "Double Channeled Swivel Chair",
+    description:
+      "Atop a 360-degree swivel, cleanly shaped seating is upholstered in cream-colored high-performance fabric, for a sensible spin on modern styling. Performance fabrics are specially created to withstand spills, stains, high traffic and wear, ensuring long-term comfort and unmatched durability.",
+    images: [
+      "double_channeled_swivel_chair_1.jpeg",
+      "double_channeled_swivel_chair_2.jpeg",
+      "double_channeled_swivel_chair_3.jpeg",
+    ],
+    price: 999,
+    stock: 15,
+    featured: false,
+    category: categories[3],
+    slug: "double_channeled_swivel_chair",
+  });
+
+  await Product.create({
+    name: "Solstice Coffee Table",
+    description:
+      "A simple design and a standout piece in any space. This round horseshoe shaped coffee table, while elegant, adds space to place your favorite drinks and books. The table is made of flexible plywood with solid wood bracing for support. This particular striping has been left raw in color and finished with a satin water-based polyethylene for protection.",
+    images: [
+      "solstice_coffee_table_1.jpeg",
+      "solstice_coffee_table_2.jpeg",
+      "solstice_coffee_table_3.jpeg",
+    ],
+    price: 799,
+    stock: 15,
+    featured: false,
+    category: categories[0],
+    slug: "solstice_coffee_table",
+  });
+
+  await Product.create({
+    name: "Irving Wood Table Lamp",
+    description:
+      "This one-of-a-kind lamp is made from the tropical hardwood Cupesí. This lamp is an excellent choice to place in the living room, bedrooms and all kinds of modern environments thanks to its integration of colors. Modern thanks to its integration of colors that combine with the latest trends in the world of decoration.",
+    images: [
+      "irving_wood_table_lamp_1.jpeg",
+      "irving_wood_table_lamp_2.jpeg",
+      "irving_wood_table_lamp_3.jpeg",
+    ],
+    price: 549,
+    stock: 15,
+    featured: false,
+    category: categories[4],
+    slug: "irving_wood_table_lamp",
+  });
+
   // ================ Tables ============================================
 
   await Product.create({
