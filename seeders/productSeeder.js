@@ -207,66 +207,67 @@ module.exports = async () => {
   // ============== PACK - 4 ===============
 
   await Product.create({
-    name: "Harmony Modular Sofa",
+    name: "Haven Bumper Chaise Sectional",
     description:
-      "",
+      "Ideal to complete the spaces of your home and that no one is left out when it comes to enjoy a great day. Its ergonomics, foam thickness and softness of the fabric will not go unnoticed in your home, it is the space where you will want to spend all day. ",
     images: [
-      "harmony_modular_sofa_1.jpeg",
-     
+      "haven_2_piece_bumper_chaise_1.jpeg",
+      "haven_2_piece_bumper_chaise_2.jpeg",
+      "haven_2_piece_bumper_chaise_3.jpeg",
     ],
-    price: 2399,
+    price: 3500,
     stock: 15,
     featured: false,
     category: categories[3],
-    slug: "harmony_modular_sofa",
+    slug: "haven_2_piece_bumper_chaise",
   });
 
   await Product.create({
-    name: "Double Channeled Swivel Chair",
+    name: "Woven Wicker Outdoor Chair",
     description:
-      "Atop a 360-degree swivel, cleanly shaped seating is upholstered in cream-colored high-performance fabric, for a sensible spin on modern styling. Performance fabrics are specially created to withstand spills, stains, high traffic and wear, ensuring long-term comfort and unmatched durability.",
+      "Great texture for the great outdoors. Woven all-weather wicker forms a light, hyacinth-like frame for a durable ivory seat cushion, spurring a grand, shapely look and feel. Cover or store indoors during inclement weather and when not in use.",
     images: [
-      "double_channeled_swivel_chair_1.jpeg",
-      "double_channeled_swivel_chair_2.jpeg",
-      "double_channeled_swivel_chair_3.jpeg",
+      "woven_wicker_outdoor_chair_1.jpeg",
+      "woven_wicker_outdoor_chair_2.jpeg",
+      "woven_wicker_outdoor_chair_3.jpeg",
     ],
-    price: 999,
+    price: 1099,
     stock: 15,
     featured: false,
-    category: categories[3],
-    slug: "double_channeled_swivel_chair",
+    category: categories[1],
+    slug: "woven_wicker_outdoor_chair",
   });
 
   await Product.create({
-    name: "Solstice Coffee Table",
+    name: "Yvette Woven Tall Cabinet",
     description:
-      "A simple design and a standout piece in any space. This round horseshoe shaped coffee table, while elegant, adds space to place your favorite drinks and books. The table is made of flexible plywood with solid wood bracing for support. This particular striping has been left raw in color and finished with a satin water-based polyethylene for protection.",
+      "With its two large storage spaces and its shelf, Yvette allows you to store clothes, dishes, books, trinkets.... In short, everything you want. This beautiful sideboard, with its solid natural pine structure, is, in fact, perfectly functional. It is also sober and elegant. Exotic too. Its two doors and its rattan shelf bring a bit of the atmosphere that reigns in some faraway places, especially in Southeast Asia. Or how to travel, far away without leaving your sofa.",
     images: [
-      "solstice_coffee_table_1.jpeg",
-      "solstice_coffee_table_2.jpeg",
-      "solstice_coffee_table_3.jpeg",
+      "yvette_tall_cabinet_1.jpeg",
+      "yvette_tall_cabinet_2.jpeg",
+      "yvette_tall_cabinet_3.jpeg",
     ],
-    price: 799,
-    stock: 15,
-    featured: false,
-    category: categories[0],
-    slug: "solstice_coffee_table",
-  });
-
-  await Product.create({
-    name: "Irving Wood Table Lamp",
-    description:
-      "This one-of-a-kind lamp is made from the tropical hardwood Cupesí. This lamp is an excellent choice to place in the living room, bedrooms and all kinds of modern environments thanks to its integration of colors. Modern thanks to its integration of colors that combine with the latest trends in the world of decoration.",
-    images: [
-      "irving_wood_table_lamp_1.jpeg",
-      "irving_wood_table_lamp_2.jpeg",
-      "irving_wood_table_lamp_3.jpeg",
-    ],
-    price: 549,
+    price: 979,
     stock: 15,
     featured: false,
     category: categories[4],
-    slug: "irving_wood_table_lamp",
+    slug: "yvette_tall_cabinet",
+  });
+
+  await Product.create({
+    name: "Overarching Curvilinear Mid-Century Floor Lamp",
+    description:
+      "Modern luminaire design. The combination of metal and marble gives it a touch of contemporary elegance. With steel tube structure with brass tops available in various finishes; unvarnished, black, green, brass, blue and curry. The lampshade is conical in glass and adopts a LED light source.",
+    images: [
+      "overarching_curvilinear_1.jpeg",
+      "overarching_curvilinear_2.jpeg",
+      "overarching_curvilinear_3.jpeg",
+    ],
+    price: 319,
+    stock: 15,
+    featured: false,
+    category: categories[4],
+    slug: "overarching_curvilinear_floor_lamp",
   });
 
   // ================ Tables ============================================
